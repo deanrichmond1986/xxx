@@ -5166,3 +5166,46 @@ button:focus-visible {
 
 /* White text remains legible above the brighter violet background. */
 body { color: #ffffff; }
+
+/* Larger coins; energy stays just above the bottom navigation. */
+.onboarding__img {
+  width: min(76vw, 320px);
+  height: auto;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+.work .listing-card,
+.work .stats {
+  flex-shrink: 0;
+}
+.work .clicker {
+  width: min(100%, 400px);
+  max-width: 400px;
+  height: 400px;
+  max-height: none;
+  min-height: 0;
+  flex: 0 1 auto;
+  margin: 16px auto 24px;
+}
+.work .clicker__tap-box {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+.work .clicker__coin {
+  object-fit: contain;
+}
+.work .energy {
+  margin-top: auto;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+@media (max-height: 700px) {
+  .work .stats { margin-top: 12px; }
+  .work .stats__clicks { font-size: 56px; line-height: 56px; }
+  .work .clicker { margin-top: 4px; margin-bottom: 8px; }
+}
