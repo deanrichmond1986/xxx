@@ -1,23 +1,33 @@
 #!/usr/bin/env python3
-"""Generate the Pages theme/UI from the canonical Telegram frontend."""
+"""Sync the original Telegram frontend with its static Pages demo variant."""
 from pathlib import Path
 import argparse
-
 root = Path(__file__).resolve().parents[1]
-check = argparse.ArgumentParser()
-check.add_argument('--check', action='store_true')
-args = check.parse_args()
-source = root / 'front'
-dest = root / 'docs'
-html = (source / 'index.html').read_text().replace('data-mode="live"', 'data-mode="demo"').replace(
-    '<script src="https://telegram.org/js/telegram-web-app.js"></script>',
-    '<script src="demo-runtime.js"></script>\n  <script defer src="demo-api.js?v=premium-1"></script>',
-)
+parser = argparse.ArgumentParser()
+parser.add_argument('--check', action='store_true')
+args = parser.parse_args()
+source, dest = root / 'front', root / 'docs'
+html = (source / 'index.html').read_text().replace(
+    'https://telegram.org/js/telegram-web-app.js', 'demo-runtime.js').replace(
+    '<script src="public/vendor/jquery-3.7.1.min.js"></script>',
+    '<script src="public/vendor/jquery-3.7.1.min.js"></script>\n<script src="demo-api.js"></script>')
 expected = {'index.html': html.encode()}
-for folder in ['css', 'js', 'fonts']:
+for folder in ['css', 'js', 'fonts', 'vendor']:
     for path in (source / 'public' / folder).rglob('*'):
-        if path.is_file():
-            expected[path.relative_to(source).as_posix()] = path.read_bytes()
+        if not path.is_file():
+            continue
+        name = path.relative_to(source).as_posix()
+        data = path.read_bytes()
+        if name.endswith('/modal.js'):
+            data = data.decode().replace(
+                'window.location.href = "https://t.me/+hgxLxs1MBRlmOTA1";',
+                'showNotification("Это демоверсия. Для тестовой награды нажми «Проверить подписку».", "done");').replace(
+                'тройной запас энергии', 'двойной запас энергии').encode()
+        if name.endswith('/login.js'):
+            data = data.decode().replace(
+                '"https://t.me/taptesttap_bot?start=" + manager.info.referral_code',
+                'window.location.href.split("?")[0]').encode()
+        expected[name] = data
 for name, data in expected.items():
     path = dest / name
     if args.check:

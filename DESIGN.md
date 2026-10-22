@@ -52,50 +52,36 @@ components:
     textColor: "{colors.focus}"
 ---
 
-# Money Tap Design System
+# Money Tap — original interface, restrained polish
 
 ## Overview
 
-A tactile collector's token in a violet-lit display case. This is a Russian mobile game, primarily opened from Telegram or its public browser demo. Its job is to make tapping, energy management and upgrades immediately understandable. Product register: familiar navigation and quiet utility around one expressive object, the original oversized gold coin inside an engraved orbital ring.
-
-Approved context: the user requested vivid violet backgrounds, neutral dark cards, gold coins, white text, enlarged welcome/play coins, and energy below the coin with space above navigation. Keep those decisions. Avoid casino promises, fictitious payout controls, meaningless countdowns and an all-purple monochrome treatment. Japan market/locale/content: not applicable; Russian locale alone does not establish a market or jurisdiction.
-
-Runtime token model B: `front/public/css/main.css` `:root` is canonical. This file mirrors accepted values. `scripts/sync_frontend.py` copies the shared frontend to Pages; no independently edited demo theme. `tests/verify_ui.py` checks token values and exact generated copies. Sources: user session preferences; README.md; demo state model in docs/demo-api.js; existing Go endpoint behavior. No PRD, ADR, business or permission policy was supplied. No payment or authorization rules are changed.
+The user explicitly rejected a structural redesign. The approved reference is commit fb640b3: preserve its screens, wording, iconography, gold artwork, navigation, coin dimensions and energy placement. Russian language; no Japan-specific market scope. No new branding, rings, headers or onboarding flow.
 
 ## Colors
 
-Primary is for deliberate actions; glow is reserved for the coin stage and backdrop. The surface remains neutral. All body text is white; secondary hierarchy uses weight, size and white opacity, never low-contrast purple text. Gold belongs to coin artwork and energy. Danger uses an icon and explicit error copy as well as its token. Focus is a 2px focus outline. Dark is the single theme; forced colors use system colors.
-
-Token mapping: colors keys map to `--color-{key}`; body/display families to `--font-body`/`--font-display`; rounded keys to `--radius-card`/`--radius-control`/`--radius-pill`; spacing page/gap/section to `--space-page`/`--space-gap`/`--space-section`. Shared button/card/dialog/navigation consume these variables. Scrollbar thumb/track/hover/active consume explicit `--scrollbar-*` roles in the same root.
+Keep the existing vivid violet backdrop, neutral dark cards, white labels and gold energy bar. The cosmetic supplement in `front/public/css/polish.css` defines a subtle neutral surface gradient, hairline edges and a restrained violet button gradient. Do not recolor every surface violet.
 
 ## Typography
 
-Tap Sans (local subset of the supplied San Francisco font) carries controls and Russian prose. Tap Rounded (local supplied rounded face) is reserved for balances and large headings. Subsets include Cyrillic, Latin, punctuation, currency and numbers. Use Russian Intl formatting and tabular numerals; never abbreviate essential balances. Long player names wrap. No remote font requests or emoji as navigation icons.
+Keep the supplied San Francisco and San Francisco Rounded faces and original size hierarchy. Add font smoothing and tabular balance numerals only.
 
 ## Layout
 
-One mobile shell, 480px content maximum, centered on desktop with a calm violet ambient background. 24px page inset and 16/28px grouping rhythm. Normal document scrolling owns every screen; sticky bottom navigation reserves its own space including safe-area insets. No fixed-height ancestor clips welcome, profile, upgrade or long-name content. Welcome and game share the same large coin asset. Energy follows the coin rather than clinging to navigation. All controls remain at least 44px in each actionable dimension.
+`main.css` retains the original geometry. Welcome and gameplay coins retain their enlarged sizes. The energy row retains its approved raised position. Bottom navigation stays full width. No blocks are moved or replaced.
 
 ## Elevation & Depth
 
-The coin stage is the one expressive surface: an orbital etched ring, soft violet light and original gold artwork. Cards use tonal layers and hairline borders. A single restrained shadow belongs to the coin and modal. Avoid scattered glowing card outlines and decorative chart panels. Loading and errors occupy reserved feedback slots.
+Use inset hairlines and low-opacity shadows to finish existing cards and buttons. The gold artwork gets a small drop shadow. Avoid new decorative objects.
 
 ## Shapes
 
-20px cards, 16px buttons, 28px native modal and pills only for compact status or rate badges. Shared icons use rounded 1.7px strokes, 20–24px bounds. Navigation keeps icons and visible Russian labels together.
+Keep existing radii and control dimensions. Do not introduce a new component system.
 
 ## Components
 
-Shared buttons own pointer, hover, pressed, focus-visible, disabled and busy styles without changing dimensions. Native buttons implement actions; hash links implement navigation and aria-current. Native dialog owns inertness, focus containment, Escape and restoration; script restores the opener. One live toast announces acknowledged actions. Persistent errors retain a retry action. Never use browser alert/confirm/prompt or raw HTML from profiles.
+Existing controllers own navigation, purchases, popups and notifications. Polish applies across the same shared classes, including visible keyboard focus, hover and pressed states. Disabled controls retain original behavior. Reduced-motion and forced-colors preferences are respected. Scrollbars support both standard and WebKit implementations.
 
-Use real loading indicators, not skeletons. A pending click batch is marked as saving; failed/uncertain writes are reconciled with the API, never retried automatically. Upgrade confirmation states current and next effect, cost and available balance. Insufficient funds are explained inline. Referral copy failure reveals a selectable link. Empty leaderboard is explained. Demo mode is visibly labeled and never implies real payouts or real participants.
+## Verification
 
-Motion is for press feedback and one short floating +coin response. No perpetual coin animation. Honor reduced motion by removing transforms, animation and smooth scrolling. Global visible scrollbars inherit thumb/track/hover/active tokens; forced colors stay operable.
-
-## Do's and Don'ts
-
-- Do keep white labels and a gold coin against violet light.
-- Do preserve progress and clear route/feedback state across navigation.
-- Do use the same dialog, toast and error pattern across all screens.
-- Don't turn game units into a real money estimate or invent a listing date.
-- Don't hide overflow to achieve a screenshot or shrink touch targets to fit.
+Run `npm run check:sync` and `npm run test:ui`. Verify original structure and gameplay, persistence, upgrades, all four tabs and three mobile viewport sizes. Static audit reports legacy external-listener buttons and vendor-source false positives; these are documented in evidence rather than masked with inert handlers. This change does not claim to remediate all inherited accessibility or network-state limitations.

@@ -1,28 +1,108 @@
 {
-  "passed": [
-    "accessibility: welcome",
-    "welcome, real taps, energy debit and persisted progress",
-    "accessibility: play",
-    "accessibility: insufficient-funds dialog",
-    "insufficient funds, native dialog focus containment, Escape and restored focus",
-    "upgrade exact cost, effect and prevention of duplicate purchase",
-    "accessibility: boosts",
-    "one-time double-energy bonus and claimed state",
-    "accessibility: leaders",
-    "bounded leaderboard, empty state and failure/retry recovery",
-    "accessibility: profile",
-    "accessibility: friends",
-    "clipboard failure preserves a selected, labeled referral URL",
-    "returning visitor, route restoration and browser back",
-    "uncertain write reconciles authoritative balance without replaying a tap",
-    "demo remains playable offline after assets are loaded",
-    "two-tab demo mutations are serialized by Web Locks",
-    "five viewports, no horizontal overflow, reachable welcome CTA, reduced motion and global scrollbars",
-    "initial request failure keeps welcome intact and supports retry",
-    "blocked local storage is explained without blocking gameplay or claiming saved progress",
-    "live frontend outside Telegram has an honest entry state and working help",
-    "documented color tokens match the canonical runtime palette"
+  "checks": [
+    "Original body markup, wording, screen order, controls and artwork unchanged",
+    "420x900: large coins, energy above menu, no horizontal overflow, taps, persistence, upgrade, tabs, reduced motion",
+    "390x844: large coins, energy above menu, no horizontal overflow, taps, persistence, upgrade, tabs, reduced motion",
+    "360x640: large coins, energy above menu, no horizontal overflow, taps, persistence, upgrade, tabs, reduced motion",
+    "No browser JavaScript errors"
   ],
-  "accessibility_violations": [],
-  "browser_errors": []
+  "metrics": [
+    {
+      "viewport": [
+        420,
+        900
+      ],
+      "welcomeCoin": {
+        "x": 50.40625,
+        "y": 22.074462890625,
+        "width": 319.1875,
+        "height": 319.1875
+      },
+      "game": {
+        ".clicker": {
+          "x": 16,
+          "y": 204,
+          "width": 388,
+          "height": 400
+        },
+        ".energy": {
+          "x": 16,
+          "y": 691,
+          "width": 388,
+          "height": 55
+        },
+        ".menu": {
+          "x": 0,
+          "y": 832,
+          "width": 420,
+          "height": 68
+        }
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "welcomeCoin": {
+        "x": 46.796875,
+        "y": 22.458948135375977,
+        "width": 296.390625,
+        "height": 296.3906307220459
+      },
+      "game": {
+        ".clicker": {
+          "x": 16,
+          "y": 204,
+          "width": 358,
+          "height": 400
+        },
+        ".energy": {
+          "x": 16,
+          "y": 638.609375,
+          "width": 358,
+          "height": 55
+        },
+        ".menu": {
+          "x": 0,
+          "y": 776,
+          "width": 390,
+          "height": 68
+        }
+      }
+    },
+    {
+      "viewport": [
+        360,
+        640
+      ],
+      "welcomeCoin": {
+        "x": 43.203125,
+        "y": 22.271982192993164,
+        "width": 273.59375,
+        "height": 273.59374046325684
+      },
+      "game": {
+        ".clicker": {
+          "x": 16,
+          "y": 172,
+          "width": 328,
+          "height": 311
+        },
+        ".energy": {
+          "x": 16,
+          "y": 491,
+          "width": 328,
+          "height": 55
+        },
+        ".menu": {
+          "x": 0,
+          "y": 572,
+          "width": 360,
+          "height": 68
+        }
+      }
+    }
+  ],
+  "errors": []
 }

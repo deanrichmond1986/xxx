@@ -1,0 +1,111 @@
+/* Cosmetic finish on the original layout. Coin/energy/menu geometry lives in main.css. */
+:root {
+  --surface-polished: linear-gradient(145deg, #2b2a34, #24242c 72%);
+  --edge-polished: rgba(255, 255, 255, 0.085);
+  --scrollbar-thumb: #89749f;
+  --scrollbar-track: #19171f;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.listing-card,
+.shop__list,
+.list,
+.popup__box {
+  background: var(--surface-polished);
+  box-shadow:
+    inset 0 0 0 1px var(--edge-polished),
+    0 8px 24px #00000012;
+}
+.listing-card__icon,
+.shop__item-icon {
+  box-shadow: inset 0 0 0 1px #ffffff06;
+}
+.button_type_default {
+  background: linear-gradient(160deg, #a45cf0, #8138d6);
+  box-shadow:
+    inset 0 1px 0 #ffffff26,
+    0 4px 12px #541a8e26;
+}
+.button {
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+}
+.button:focus-visible,
+.menu__button:focus-visible,
+#tapBox:focus-visible {
+  outline: 2px solid #dfc2ff;
+  outline-offset: 3px;
+}
+.menu {
+  box-shadow:
+    0 -1px 0 #ffffff0d,
+    0 -8px 24px #00000014;
+}
+.menu__button_current .menu__button-icon {
+  background-color: #c59aff;
+}
+.stats__clicks,
+.perks-balance__coins {
+  font-variant-numeric: tabular-nums;
+}
+.onboarding__img,
+.clicker__coin {
+  filter: drop-shadow(0 8px 14px #00000024);
+}
+@media (hover: hover) {
+  .button_type_default:hover:not(:disabled) {
+    box-shadow:
+      inset 0 1px 0 #ffffff38,
+      0 5px 16px #541a8e40;
+  }
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a58dbd;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #c59aff;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (forced-colors: active) {
+  * {
+    scrollbar-color: auto;
+  }
+  .listing-card,
+  .shop__list,
+  .popup__box {
+    border: 1px solid CanvasText;
+  }
+  .button:focus-visible,
+  .menu__button:focus-visible,
+  #tapBox:focus-visible {
+    outline-color: Highlight;
+  }
+}

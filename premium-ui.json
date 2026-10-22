@@ -6,9 +6,11 @@
   "requiredCapabilities": ["Scrollbar", "Toast"],
   "requiredCommands": ["syntax", "sync", "browser"],
   "commands": {
-    "syntax": "node --check front/public/js/app.js && node --check docs/demo-api.js",
+    "syntax": "node --check front/public/js/click.js && node --check front/public/js/menu.js && node --check docs/demo-api.js",
     "sync": "python3 scripts/sync_frontend.py --check",
     "browser": "python3 tests/verify_ui.py"
   },
-  "evidence": { "failurePaths": "tests/verify_ui.py" }
+  "evidence": {
+    "failurePaths": "tests/verify_ui.py"
+  }
 }
