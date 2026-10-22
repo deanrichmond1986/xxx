@@ -1,0 +1,15 @@
+{
+  "name": "money-tap-ui",
+  "private": true,
+  "scripts": {
+    "build": "python3 scripts/sync_frontend.py",
+    "check:sync": "python3 scripts/sync_frontend.py --check",
+    "format": "prettier --write front/index.html front/public/css/main.css front/public/js/app.js docs/demo-api.js docs/demo-runtime.js DESIGN.md UX-CONTRACT.md premium-ui.json package.json",
+    "check:format": "prettier --check front/index.html front/public/css/main.css front/public/js/app.js docs/demo-api.js docs/demo-runtime.js DESIGN.md UX-CONTRACT.md premium-ui.json package.json",
+    "test:ui": "python3 tests/verify_ui.py"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "prettier": "3.5.3"
+  }
+}

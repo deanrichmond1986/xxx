@@ -5,3 +5,4 @@ __pycache__/
 *.log
 avatar/
 __MACOSX/
+node_modules/

@@ -1,0 +1,28 @@
+{
+  "passed": [
+    "accessibility: welcome",
+    "welcome, real taps, energy debit and persisted progress",
+    "accessibility: play",
+    "accessibility: insufficient-funds dialog",
+    "insufficient funds, native dialog focus containment, Escape and restored focus",
+    "upgrade exact cost, effect and prevention of duplicate purchase",
+    "accessibility: boosts",
+    "one-time double-energy bonus and claimed state",
+    "accessibility: leaders",
+    "bounded leaderboard, empty state and failure/retry recovery",
+    "accessibility: profile",
+    "accessibility: friends",
+    "clipboard failure preserves a selected, labeled referral URL",
+    "returning visitor, route restoration and browser back",
+    "uncertain write reconciles authoritative balance without replaying a tap",
+    "demo remains playable offline after assets are loaded",
+    "two-tab demo mutations are serialized by Web Locks",
+    "five viewports, no horizontal overflow, reachable welcome CTA, reduced motion and global scrollbars",
+    "initial request failure keeps welcome intact and supports retry",
+    "blocked local storage is explained without blocking gameplay or claiming saved progress",
+    "live frontend outside Telegram has an honest entry state and working help",
+    "documented color tokens match the canonical runtime palette"
+  ],
+  "accessibility_violations": [],
+  "browser_errors": []
+}
