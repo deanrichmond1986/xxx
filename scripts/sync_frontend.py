@@ -11,7 +11,7 @@ html = (source / 'index.html').read_text().replace(
     'https://telegram.org/js/telegram-web-app.js', 'demo-runtime.js').replace(
     '<script src="public/vendor/jquery-3.7.1.min.js"></script>',
     '<script src="public/vendor/jquery-3.7.1.min.js"></script>\n<script src="demo-api.js"></script>')
-expected = {'index.html': html.encode()}
+expected = {'index.html': html.encode(), 'public/img/friends-premium.svg': (source / 'public/img/friends-premium.svg').read_bytes()}
 for folder in ['css', 'js', 'fonts', 'vendor']:
     for path in (source / 'public' / folder).rglob('*'):
         if not path.is_file():

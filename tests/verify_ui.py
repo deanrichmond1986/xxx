@@ -43,7 +43,10 @@ with sync_playwright() as p:
         state['balance']=1000
         page.evaluate("s=>localStorage.setItem('money-tap-demo-v1',JSON.stringify(s))",state)
         page.reload(wait_until='networkidle');page.locator('.start-btn').click()
-        page.evaluate("openPage('perks');openToques()")
+        page.evaluate("openPage('perks')")
+        expect(page.locator('.perks')).to_be_visible()
+        page.wait_for_timeout(100)
+        page.evaluate('openToques()')
         page.locator('.buy_toques').click();page.wait_for_timeout(400)
         state=page.evaluate("JSON.parse(localStorage.getItem('money-tap-demo-v1'))")
         assert state['balance']==0 and state['modifies']['toques_lvl']==2

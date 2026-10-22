@@ -3,21 +3,21 @@ version: alpha
 name: Money Tap
 description: "A tactile gold token inside a violet-lit mobile game"
 colors:
-  primary: "#8b3fe0"
+  primary: "#9747ef"
   glow: "#7c3aed"
-  background: "#101014"
-  surface: "#211f29"
+  background: "#100d19"
+  surface: "#24212f"
   text: "#ffffff"
-  gold: "#e5aa28"
+  gold: "#ffdb78"
   danger: "#ffb4ab"
   focus: "#d8b4fe"
 typography:
   body:
-    fontFamily: '"Tap Sans", system-ui, sans-serif'
+    fontFamily: '"San Francisco", system-ui, sans-serif'
     fontSize: "16px"
     lineHeight: "1.5"
   display:
-    fontFamily: '"Tap Rounded", system-ui, sans-serif'
+    fontFamily: '"San Francisco Rounded", system-ui, sans-serif'
     lineHeight: "1.08"
 rounded:
   DEFAULT: "20px"
@@ -52,7 +52,7 @@ components:
     textColor: "{colors.focus}"
 ---
 
-# Money Tap — original interface, restrained polish
+# Money Tap — original structure, premium finish
 
 ## Overview
 
@@ -60,11 +60,11 @@ The user explicitly rejected a structural redesign. The approved reference is co
 
 ## Colors
 
-Keep the existing vivid violet backdrop, neutral dark cards, white labels and gold energy bar. The cosmetic supplement in `front/public/css/polish.css` defines a subtle neutral surface gradient, hairline edges and a restrained violet button gradient. Do not recolor every surface violet.
+Keep the existing vivid violet backdrop, neutral dark cards, white labels and gold energy bar. The cosmetic supplement in `front/public/css/polish.css` defines a layered graphite surfaces, lit edges and a more expressive violet button gradient. Do not recolor every surface violet.
 
 ## Typography
 
-Keep the supplied San Francisco and San Francisco Rounded faces and original size hierarchy. Add font smoothing and tabular balance numerals only.
+Keep the supplied San Francisco and San Francisco Rounded faces and original size hierarchy. Retain body and display roles; strengthen heading weights, tighten display tracking, and use tabular balance numerals.
 
 ## Layout
 
@@ -72,11 +72,11 @@ Keep the supplied San Francisco and San Francisco Rounded faces and original siz
 
 ## Elevation & Depth
 
-Use inset hairlines and low-opacity shadows to finish existing cards and buttons. The gold artwork gets a small drop shadow. Avoid new decorative objects.
+The signature is the original gold coin suspended in violet light, without added rings or brand graphics. Layer graphite cards with a brighter upper edge and a darker base. Energy gets a translucent surface behind its existing row; active navigation gets an inset violet selection surface. These treatments never change element geometry.
 
 ## Shapes
 
-Keep existing radii and control dimensions. Do not introduce a new component system.
+Use 20px cards, 16px primary buttons and 13px navigation selections. Keep existing control dimensions and all screen/block positions.
 
 ## Components
 
@@ -85,3 +85,7 @@ Existing controllers own navigation, purchases, popups and notifications. Polish
 ## Verification
 
 Run `npm run check:sync` and `npm run test:ui`. Verify original structure and gameplay, persistence, upgrades, all four tabs and three mobile viewport sizes. Static audit reports legacy external-listener buttons and vendor-source false positives; these are documented in evidence rather than masked with inert handlers. This change does not claim to remediate all inherited accessibility or network-state limitations.
+
+Runtime ownership: `polish.css` is the canonical finishing layer; its `--premium-*` tokens map primary/surface/background/text/gold to the corresponding DESIGN colors and are consumed by shared original classes. `main.css` owns layout. `scripts/sync_frontend.py` generates the identical Pages stylesheet. The latest user correction requires clearly visible refinement, not merely a source restoration.
+
+Navigation repair: remove the redundant delayed hide in the original openPage controller; it could hide a screen that had already been reopened during quick navigation. No routes or layout change.

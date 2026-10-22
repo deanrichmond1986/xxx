@@ -1,32 +1,96 @@
-/* Cosmetic finish on the original layout. Coin/energy/menu geometry lives in main.css. */
+/* Premium finish for the original Money Tap structure. No layout overrides. */
 :root {
-  --surface-polished: linear-gradient(145deg, #2b2a34, #24242c 72%);
-  --edge-polished: rgba(255, 255, 255, 0.085);
+  --premium-base: #100d19;
+  --premium-surface: #24212f;
+  --premium-surface-top: #34303f;
+  --premium-edge: #ffffff20;
+  --premium-violet: #9747ef;
+  --premium-violet-light: #bd85ff;
+  --premium-white: #ffffff;
+  --premium-gold: #ffdb78;
   --scrollbar-thumb: #89749f;
   --scrollbar-track: #19171f;
 }
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  background: var(--premium-base);
+}
+.bg_gradient_red_main {
+  background:
+    radial-gradient(ellipse at 50% 55%, #9a48ed52, transparent 49%),
+    radial-gradient(ellipse at 95% 96%, #8950e063, transparent 60%),
+    linear-gradient(165deg, #17121f 2%, #1e142f 40%, #43226d 76%, #251735);
+}
+.onboarding {
+  background:
+    radial-gradient(ellipse at 50% 17%, #a04cf570, transparent 45%),
+    radial-gradient(ellipse at 100% 0%, #7031af55, transparent 50%),
+    linear-gradient(170deg, #24132f, #100e17 57%) !important;
 }
 .listing-card,
 .shop__list,
 .list,
+.balance-stats__card,
+.rating-card,
 .popup__box {
-  background: var(--surface-polished);
+  background: linear-gradient(
+    135deg,
+    var(--premium-surface-top),
+    var(--premium-surface) 75%
+  );
+  border-radius: 20px;
   box-shadow:
-    inset 0 0 0 1px var(--edge-polished),
-    0 8px 24px #00000012;
+    inset 0 0 0 1px var(--premium-edge),
+    inset 0 1px 0 #ffffff0a,
+    0 12px 28px #09061135;
+}
+.listing-card {
+  background: linear-gradient(115deg, #40304f, #272330 70%);
 }
 .listing-card__icon,
-.shop__item-icon {
-  box-shadow: inset 0 0 0 1px #ffffff06;
-}
-.button_type_default {
-  background: linear-gradient(160deg, #a45cf0, #8138d6);
+.shop__item-icon,
+.list-item__icon,
+.onboarding__mechanic-icon {
+  background: linear-gradient(145deg, #ffffff11, #ffffff03);
+  border-radius: 14px;
   box-shadow:
-    inset 0 1px 0 #ffffff26,
-    0 4px 12px #541a8e26;
+    inset 0 0 0 1px #ffffff13,
+    0 4px 12px #00000014;
+}
+.listing-card__title,
+.list-item__title,
+.shop__item-title {
+  font-weight: 650;
+  letter-spacing: -0.25px;
+}
+.listing-card__description,
+.list-item__subtitle,
+.shop__item-subtitle {
+  color: var(--premium-white);
+}
+.onboarding__title {
+  font-weight: 750;
+  letter-spacing: -0.65px;
+  text-wrap: balance;
+}
+.onboarding__caption {
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.onboarding__mechanic-title {
+  font-weight: 650;
+  letter-spacing: -0.2px;
+}
+.onboarding__mechanic-description {
+  line-height: 1.4;
+}
+.stats__clicks,
+.perks-balance__coins,
+.balance__coins {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1.6px;
+  text-shadow: 0 3px 24px #c89aff24;
 }
 .button {
   transition:
@@ -34,34 +98,147 @@ body {
     box-shadow 150ms ease,
     opacity 150ms ease;
 }
+.button_type_default {
+  color: var(--premium-white);
+  background: linear-gradient(
+    120deg,
+    #b475ff,
+    var(--premium-violet) 55%,
+    #8337d8
+  );
+  box-shadow:
+    inset 0 1px 0 #ffffff50,
+    inset 0 0 0 1px #ffffff19,
+    0 6px 20px #772ad54d;
+  font-weight: 650;
+}
+.button_shape_large {
+  border-radius: 16px;
+}
+.button_type_blazed {
+  background: linear-gradient(135deg, #a367ef32, #8b3fe01c);
+  box-shadow: inset 0 0 0 1px #bf8af437;
+}
+.listing-card__button {
+  border-radius: 12px;
+}
 .button:focus-visible,
 .menu__button:focus-visible,
 #tapBox:focus-visible {
   outline: 2px solid #dfc2ff;
   outline-offset: 3px;
 }
-.menu {
-  box-shadow:
-    0 -1px 0 #ffffff0d,
-    0 -8px 24px #00000014;
-}
-.menu__button_current .menu__button-icon {
-  background-color: #c59aff;
-}
-.stats__clicks,
-.perks-balance__coins {
-  font-variant-numeric: tabular-nums;
+.clicker::before {
+  content: "";
+  position: absolute;
+  inset: 4% 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    #bf7aff44,
+    #8f3ee726 40%,
+    transparent 68%
+  );
+  pointer-events: none;
 }
 .onboarding__img,
 .clicker__coin {
-  filter: drop-shadow(0 8px 14px #00000024);
+  filter: drop-shadow(0 20px 22px #05020985) drop-shadow(0 -2px 12px #d8a2ff26);
+}
+.energy {
+  position: relative;
+  isolation: isolate;
+}
+.energy::before {
+  content: "";
+  position: absolute;
+  inset: -12px -2px;
+  z-index: -1;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #ffffff0d, #ffffff03);
+  box-shadow:
+    inset 0 0 0 1px #ffffff16,
+    0 8px 24px #140b2326;
+  pointer-events: none;
+}
+.energy__current {
+  font-weight: 700;
+}
+.energy__increase-btn {
+  font-size: 15px;
+  font-weight: 600;
+}
+.progress-bar-energy {
+  background: linear-gradient(
+    90deg,
+    #e7ad31,
+    var(--premium-gold) 72%,
+    #fff0b8
+  ) !important;
+  box-shadow:
+    0 0 12px #ffd46720,
+    inset 0 1px 0 #fff8d666;
+}
+.menu {
+  background: linear-gradient(180deg, #251e32f5, #18131ffb);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 #ffffff1f,
+    0 -12px 32px #110b1b40;
+}
+.menu__button {
+  position: relative;
+  isolation: isolate;
+}
+.menu__button::before {
+  content: "";
+  position: absolute;
+  inset: 5px 8px;
+  border-radius: 13px;
+  z-index: -1;
+  pointer-events: none;
+}
+.menu__button_current::before {
+  background: linear-gradient(145deg, #a75df23b, #8d41dd20);
+  box-shadow: inset 0 0 0 1px #c28bff30;
+}
+.menu__button-icon {
+  background-color: #dfd6eb;
+  height: 25px;
+  width: 25px;
+}
+.menu__button_current .menu__button-icon {
+  background-color: #ceabff;
+  filter: drop-shadow(0 0 5px #b16aff40);
+}
+.menu__button-name {
+  font-size: 11px;
+  font-weight: 600;
+}
+.rating-card {
+  border-color: transparent;
+}
+.rating-card__avatar {
+  box-shadow: 0 0 0 2px #ffffff12;
+}
+.rating-card__amount,
+.balance-stats__card-count {
+  font-variant-numeric: tabular-nums;
 }
 @media (hover: hover) {
   .button_type_default:hover:not(:disabled) {
+    opacity: 1;
     box-shadow:
-      inset 0 1px 0 #ffffff38,
-      0 5px 16px #541a8e40;
+      inset 0 1px 0 #ffffff65,
+      0 8px 24px #9747ef70;
   }
+  .menu__button:hover::before {
+    background-color: #ffffff09;
+  }
+}
+.button_type_default:active:not(:disabled) {
+  opacity: 0.82;
+  box-shadow: inset 0 2px 7px #3b106142;
 }
 * {
   scrollbar-width: thin;
@@ -108,4 +285,18 @@ body {
   #tapBox:focus-visible {
     outline-color: Highlight;
   }
+}
+
+/* Original secondary screens share the same material and ambient light. */
+.perks,
+.rating,
+.balance,
+.referals {
+  background:
+    radial-gradient(ellipse at 95% 4%, #9550db40, transparent 55%),
+    linear-gradient(165deg, #1f162b, #110e18 65%) !important;
+}
+/* Replace an inherited corrupt embedded referral icon within its original slot. */
+.perks .list[onclick*="referals"] .list-item__icon img {
+  content: url("../img/friends-premium.svg");
 }

@@ -27,9 +27,6 @@ function openPage(page, callback = "") {
         if (p !== page) {
             pageElement.classList.remove("visible");
             pageElement.style.display = "none";
-            setTimeout(() => {
-                pageElement.style.display = "none";
-            }, 10);
         }
     });
 
