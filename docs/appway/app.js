@@ -863,15 +863,16 @@ function setupTelegramMiniAppViewport(){
  document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault()},{passive:false});
  window.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
 }
-function initGate(){
- const preview=new URLSearchParams(location.search).get('preview')==='1';const ua=navigator.userAgent||'',platform=navigator.platform||'';
- const isIPad=/iPad/.test(ua)||(platform==='MacIntel'&&navigator.maxTouchPoints>1);
- const isIPhone=/iPhone/.test(ua)&&!isIPad;
- const telegram=isTelegramMiniApp();
- if(preview&&!isIPad){document.body.classList.add('preview-mode');return true}
- if(!isIPhone){$('#deviceStage').hidden=true;$('#iosGate').hidden=false;return false}
- if(telegram){document.body.classList.remove('preview-mode');document.body.classList.add('telegram-miniapp');setupTelegramMiniAppViewport()}
- return true;
+function setupAppViewport(){
+ // Device type never blocks access to the catalog.
+ if(isTelegramMiniApp()){
+  document.body.classList.remove('preview-mode');
+  document.body.classList.add('telegram-miniapp');
+  setupTelegramMiniAppViewport();
+ }else{
+  document.body.classList.remove('telegram-miniapp');
+  document.body.classList.add('preview-mode');
+ }
 }
 const THEME_ICONS={
  light:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
@@ -900,7 +901,7 @@ function setupScrollTop(){
  btn.onclick=()=>{const p=$(`[data-page="${state.page}"]`);if(p)p.scrollTo({top:0,behavior:'smooth'})};
 }
 function init(){
- if(!initGate())return;setupAppSplash();setLanguage(state.lang);setupInputs();setupScrollTop();setupTheme();setupChipScroll();refreshMirrorAccessState();
+ setupAppViewport();setupAppSplash();setLanguage(state.lang);setupInputs();setupScrollTop();setupTheme();setupChipScroll();refreshMirrorAccessState();
  $$('[data-nav]').forEach(b=>b.onclick=()=>{
   const n=b.dataset.nav;if(!$('#sideOverlay').hidden)$('#sideOverlay').hidden=true;
   $$('.nav-item').forEach(x=>x.classList.toggle('active',x.dataset.nav===n));
