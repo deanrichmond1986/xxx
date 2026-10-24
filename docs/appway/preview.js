@@ -5,3 +5,11 @@ document.addEventListener('DOMContentLoaded',()=>{
  const message=()=>showToast(state.lang==='ru'?'Для установки нужен сервер проекта. В этом просмотре доступен каталог.':'Installation needs the project server. This preview provides the catalog.',4500);
  document.getElementById('getSharedAppleIdBtn').onclick=message;
 });
+
+// Fit the entire device proportionally; keep its internal CSS-pixel viewport fixed.
+function fitIPhonePreview(){
+ const deviceScale=Math.min(1,Math.max(0.1,(innerWidth-48)/409),Math.max(0.1,(innerHeight-48)/868));
+ document.documentElement.style.setProperty('--iphone-preview-scale',String(deviceScale));
+}
+window.addEventListener('resize',fitIPhonePreview,{passive:true});
+fitIPhonePreview();
