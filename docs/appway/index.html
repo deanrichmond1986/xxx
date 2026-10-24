@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#11141a">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/appway.png">
+  <!-- iOS Safari «Добавить на экран Домой»: отдельная иконка ярлыка. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/appway.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="AppWay">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AppWay — iOS catalog</title>
+  <script>
+    // Дефолт — тёмная тема. Ставим data-theme до того как CSS применится,
+    // чтобы при открытии не мигала светлая тема (FOUC). Если пользователь
+    // ранее переключал — уважаем сохранённый выбор.
+    try {
+      var __t = localStorage.getItem('store-demo-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', __t);
+    } catch (_) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=appway-editorial-7">
+  <link rel="stylesheet" href="preview.css?v=original-1">
+</head>
+<body>
+  <script>window.__appWaySplashStartedAt=performance.now()</script>
+  <div id="iosGate" class="ios-gate" hidden>
+    <div class="gate-card">
+      <div class="gate-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><rect x="19" y="9" width="26" height="46" rx="5"/><path d="M27 14h10M29 49h6M14 14l36 36"/></svg>
+      </div>
+      <h1 data-i="iosOnlyTitle">Ваше устройство не подходит</h1>
+      <p data-i="iosOnlyText">Это приложение доступно только на iPhone. Пожалуйста, откройте его на своём iPhone.</p>
+    </div>
+  </div>
+
+  <div id="deviceStage" class="device-stage">
+    <div id="siteShell" class="site-shell">
+      <div id="appSplash" class="app-splash" role="status" aria-label="AppWay">
+        <div class="app-splash-content">
+          <span class="app-splash-glow" aria-hidden="true"></span>
+          <span class="app-splash-logo"><img src="assets/icons/appway.png" alt=""></span>
+          <strong>AppWay</strong>
+          <span class="app-splash-subtitle" data-i="brandSub">Каталог приложений на iOS</span>
+        </div>
+      </div>
+      <header class="app-header">
+        <button class="brand" data-nav="home" aria-label="Home">
+          <span class="brand-logo-tile"><img class="brand-header-logo" src="assets/icons/appway.png" alt="AppWay"></span>
+          <span class="brand-copy"><b>AppWay</b><small data-i="brandSub">Каталог приложений на iOS</small></span>
+        </button>
+        <div class="header-actions">
+          <button id="langBtn" class="round-action language-button" aria-label="Language"><span>RU</span></button>
+          <button id="themeToggleBtn" class="round-action" aria-label="Toggle theme" type="button">
+            <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
+          </button>
+          <button id="menuBtn" class="round-action" aria-label="Menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="page-stack" id="pageStack">
+        <section id="homePage" class="page active" data-page="home">
+          <div class="mosaic-wrap">
+            <div id="marqueeWall" class="marquee-wall" aria-hidden="true"></div>
+            <div class="mosaic-fade"></div>
+          </div>
+
+          <section class="hero-search surface">
+            <span class="eyebrow" data-i="curated">ПОДБОРКА ДЛЯ ВАС</span>
+            <h1 data-i="findTitle">Найдите нужное приложение</h1>
+            <p data-i="findSub">Каталог знакомых сервисов в аккуратном мобильном интерфейсе.</p>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="homeSearch" autocomplete="off" data-ph="searchPlaceholder" placeholder="Название приложения">
+              <button id="homeSearchClear" class="input-clear" hidden aria-label="Clear"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+            </div>
+          </section>
+
+          <section class="section-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="popularNow">СЕЙЧАС ПОПУЛЯРНО</span><h2 data-i="popular">Популярное</h2></div><button class="link-button" data-nav="catalog" data-i="allApps">Все приложения</button></div>
+            <div id="popularList" class="app-list"></div>
+          </section>
+
+          <section class="section-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="collectionsKicker">ПОДБОРКИ</span><h2 data-i="featured">Что может пригодиться</h2></div><button class="link-button" data-nav="collections" data-i="more">Ещё</button></div>
+            <div id="featureCards" class="feature-scroller"></div>
+          </section>
+
+          <section class="section-block finance-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="financeKicker">ФИНАНСЫ</span><h2 data-i="bankingTitle">Банковские приложения</h2></div><button class="link-button" data-filter-nav="finance" data-i="allFinance">Все</button></div>
+            <div id="financeRail" class="icon-rail"></div>
+          </section>
+
+          <section class="section-block games-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="gamesKicker">ИГРЫ</span><h2 data-i="gamesTitle">Игры для iPhone и iPad</h2></div><button class="link-button" data-filter-nav="games" data-i="allGames">Все игры</button></div>
+            <div id="gamesRail" class="game-rail"></div>
+          </section>
+
+          <section class="section-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="mediaKicker">СТРИМИНГ</span><h2 data-i="mediaTitle">Кино, сериалы и музыка</h2></div><button class="link-button" data-filter-nav="media" data-i="allMedia">Все</button></div>
+            <div id="mediaRail" class="icon-rail"></div>
+          </section>
+
+          <section class="section-block">
+            <div class="section-title"><div><span class="section-kicker" data-i="shopKicker">ПОКУПКИ</span><h2 data-i="shopTitle">Магазины и доставка</h2></div><button class="link-button" data-filter-nav="shopping" data-i="allShop">Все</button></div>
+            <div id="shopRail" class="icon-rail"></div>
+          </section>
+
+          <section class="section-block bottom-spacer">
+            <div class="section-title"><div><span class="section-kicker" data-i="categoriesKicker">КАТЕГОРИИ</span><h2 data-i="browseTopics">По интересам</h2></div></div>
+            <div id="homeCategories" class="category-grid"></div>
+          </section>
+        </section>
+
+        <section id="catalogPage" class="page" data-page="catalog">
+          <div class="page-head compact-head">
+            <span class="eyebrow" data-i="catalogKicker">КАТАЛОГ</span>
+            <h1 data-i="allAppsTitle">Все приложения</h1>
+            <div class="search-box catalog-search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="catalogSearch" autocomplete="off" data-ph="searchPlaceholder" placeholder="Название приложения">
+              <button id="catalogSearchClear" class="input-clear" hidden aria-label="Clear"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+            </div>
+            <div class="filter-chips-wrap">
+              <div id="filterChips" class="filter-chips"></div>
+              <button id="chipScrollLeft" class="chip-scroll chip-scroll-left" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+              <button id="chipScrollRight" class="chip-scroll chip-scroll-right" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+            </div>
+          </div>
+          <div id="catalogCount" class="catalog-count"></div>
+          <div id="catalogList" class="catalog-list"></div>
+          <div class="bottom-spacer"></div>
+        </section>
+
+        <section id="collectionsPage" class="page" data-page="collections">
+          <div class="page-head">
+            <span class="eyebrow" data-i="collectionsKicker">ПОДБОРКИ</span>
+            <h1 data-i="collectionsTitle">Подборки</h1>
+            <p data-i="collectionsSub">Быстрые тематические наборы приложений.</p>
+          </div>
+          <div id="collectionList" class="collection-list"></div>
+          <div class="bottom-spacer"></div>
+        </section>
+
+        <section id="detailPage" class="page detail-page" data-page="detail">
+          <div class="detail-topbar">
+            <button id="detailBack" class="back-chip" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg><span data-i="back">Назад</span></button>
+            <button id="detailShare" class="circle-chip" aria-label="Share"><svg viewBox="0 0 24 24"><path d="M12 15V4m0 0L8 8m4-4 4 4M6 11v8h12v-8"/></svg></button>
+          </div>
+          <div id="detailContent"></div>
+          <div class="bottom-spacer detail-space"></div>
+        </section>
+
+        <section id="searchPage" class="page" data-page="search">
+          <div class="page-head">
+            <span class="eyebrow" data-i="searchKicker">ПОИСК</span>
+            <h1 data-i="searchTitle">Что ищем?</h1>
+            <div class="search-box search-large">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="globalSearch" autocomplete="off" data-ph="searchPlaceholder" placeholder="Название приложения">
+              <button id="globalSearchClear" class="input-clear" hidden aria-label="Clear"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+            </div>
+          </div>
+          <div id="searchHint" class="search-hint"></div>
+          <div id="searchResults" class="catalog-list"></div>
+          <div class="bottom-spacer"></div>
+        </section>
+      </main>
+
+      <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg>
+      </button>
+
+      <nav id="bottomNav" class="bottom-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-nav="home"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V20h-6v-5h-4v5H4z"/></svg></span><small data-i="navHome">Главная</small></button>
+        <button class="nav-item" data-nav="catalog"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span><small data-i="navApps">Каталог</small></button>
+        <button class="nav-item" data-nav="collections"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 17.5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><small data-i="navPicks">Подборки</small></button>
+        <button class="nav-item" data-nav="search"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15.2 15.2 4.3 4.3"/></svg></span><small data-i="navSearch">Поиск</small></button>
+      </nav>
+
+      <div id="langPopover" class="popover" hidden>
+        <button data-lang="ru"><span>Русский</span><b>RU</b></button>
+        <button data-lang="en"><span>English</span><b>EN</b></button>
+      </div>
+
+      <div id="sideOverlay" class="overlay" hidden>
+        <aside class="side-panel">
+          <div class="side-grabber"></div>
+          <div class="side-heading"><div><small>AppWay</small><b data-i="menuTitle">Меню</b></div><button id="closeMenu" class="circle-chip" aria-label="Close"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button></div>
+          <button data-nav="home"><span data-i="navHome">Главная</span><b>›</b></button>
+          <button data-nav="catalog"><span data-i="navApps">Каталог</span><b>›</b></button>
+          <button data-nav="collections"><span data-i="navPicks">Подборки</span><b>›</b></button>
+          <div class="side-site-info">
+            <div class="side-support">
+              <small data-i="sideSupportLabel">При поддержке</small>
+              <b data-i="sideSupportName">сообщества разработчиков</b>
+            </div>
+            <div class="side-socials" aria-label="Социальные сети">
+              <button type="button" class="side-social" aria-label="VK" title="VK">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 7.4h3.3c.2 2.5 1.2 4.3 2.2 4.3.8 0 .7-2 .7-4.3h3.1v2.5c0 .7-.1 1.1.5 1.1.7 0 1.8-2.2 2.5-3.6h3.3c-.6 2-2.1 4-3 5 .7.8 2.7 2.7 3.4 4.2h-3.8c-.7-1.4-1.7-2.8-2.5-2.8-.5 0-.4.6-.4 1.1v1.7h-.9c-3.7 0-7.7-.3-8.4-9.2Z"/></svg>
+              </button>
+              <button type="button" class="side-social" aria-label="OK" title="OK">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M7.7 13.1c2.8 1.8 5.8 1.8 8.6 0M12 14.7v4.2M8.9 17.3l3.1-2.6 3.1 2.6"/></svg>
+              </button>
+              <button type="button" class="side-social" aria-label="Telegram" title="Telegram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 11.5 15-6-3.2 13.5-4.7-3.6-2.6 2.2.4-4.1 7.7-5.3-9.5 4.1-3.1-.8Z"/></svg>
+              </button>
+              <button type="button" class="side-social" aria-label="Сообщество" title="Сообщество">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.8 4.8 3.2 7.2 8 8-4.8.8-7.2 3.2-8 8-.8-4.8-3.2-7.2-8-8 4.8-.8 7.2-3.2 8-8Z"/></svg>
+              </button>
+            </div>
+            <p class="side-copyright" data-i="sideCopyright">© 2022–2026 AppWay — каталог приложений на iOS</p>
+            <p class="side-rights" data-i="sideRights">Все права защищены</p>
+          </div>
+        </aside>
+      </div>
+
+      <div id="sheetOverlay" class="overlay sheet-overlay" hidden>
+        <div id="installSheet" class="bottom-sheet video-sheet">
+          <button id="closeSheet" class="video-sheet-close" aria-label="Close"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+          <div id="installSheetLoading" class="sheet-loading">
+            <span class="sheet-loading-spinner"></span>
+            <b data-i="preparing">Подготовка</b>
+          </div>
+          <div id="installAccountLoading" class="install-account-loading" hidden>
+            <h2><span class="account-search-title-copy">Ищем аккаунт с</span><span id="accountSearchAppName">приложением</span></h2>
+            <p id="installAccountLoadingText">Подбираем подходящий аккаунт для установки</p>
+            <div class="account-search-card" aria-live="polite" aria-busy="true">
+              <div class="account-search-visual" aria-hidden="true">
+                <span class="account-search-halo"></span>
+                <span class="account-search-orbit"></span>
+                <span class="account-search-orbit-dot"></span>
+                <span class="account-search-icon-frame"><img id="accountSearchAppIcon" alt=""></span>
+              </div>
+              <div class="account-search-steps">
+                <div class="account-search-step" data-search-step="0">
+                  <span class="account-search-step-dot"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5.5 10.2 2.8 2.8 6.2-6.2"/></svg></span>
+                  <div><b>Проверяем доступность</b><span>Ищем свободный аккаунт</span></div>
+                </div>
+                <div class="account-search-step" data-search-step="1">
+                  <span class="account-search-step-dot"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5.5 10.2 2.8 2.8 6.2-6.2"/></svg></span>
+                  <div><b>Проверяем наличие</b><span>Смотрим список приложений</span></div>
+                </div>
+                <div class="account-search-step" data-search-step="2">
+                  <span class="account-search-step-dot"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5.5 10.2 2.8 2.8 6.2-6.2"/></svg></span>
+                  <div><b>Приложение найдено</b><span>Подготавливаем данные</span></div>
+                </div>
+                <div class="account-search-step" data-search-step="3">
+                  <span class="account-search-step-dot"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5.5 10.2 2.8 2.8 6.2-6.2"/></svg></span>
+                  <div><b>Готово</b><span>Данные готовы к выдаче</span></div>
+                </div>
+              </div>
+              <div class="account-search-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.2 2"/></svg><span>Обычно это занимает 15–20 секунд</span></div>
+            </div>
+          </div>
+          <div id="installAccountResult" class="install-account-result" hidden>
+            <span class="account-result-grabber" aria-hidden="true"></span>
+            <div class="account-result-head">
+              <img id="accountResultIcon" class="account-result-icon" alt="">
+              <h2 data-i="accountWithApp">Аккаунт с приложением</h2>
+              <p id="accountResultAppName"></p>
+            </div>
+
+            <div class="account-credentials">
+              <div class="account-credential-row">
+                <span class="account-credential-leading"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.8 19c.5-4 2.6-6 6.2-6s5.7 2 6.2 6"/></svg></span>
+                <div class="account-credential-copy"><span data-i="accountLoginLabel">Логин</span><b id="accountResultLogin"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a19020b180f0e440b1a1a060f44030e2a030906051f0e44090507">[email&#160;protected]</a></b></div>
+                <button id="copyAccountLoginBtn" class="account-copy-one" aria-label="Копировать логин"><svg viewBox="0 0 24 24"><rect x="8.5" y="7.5" width="10" height="11" rx="2"/><path d="M6.5 15.5h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+              <div class="account-credential-row">
+                <span class="account-credential-leading"><svg viewBox="0 0 24 24"><rect x="6.5" y="10" width="11" height="9" rx="2"/><path d="M9 10V7.8a3 3 0 0 1 6 0V10"/></svg></span>
+                <div class="account-credential-copy"><span data-i="accountPasswordLabel">Пароль</span><b id="accountResultPassword">Q2l9-Xm83-Pk7s</b></div>
+                <button id="copyAccountPasswordBtn" class="account-copy-one" aria-label="Копировать пароль"><svg viewBox="0 0 24 24"><rect x="8.5" y="7.5" width="10" height="11" rx="2"/><path d="M6.5 15.5h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+
+            <button id="copyAccountAllBtn" class="account-copy-all">
+              <svg viewBox="0 0 24 24"><rect x="8.5" y="7.5" width="10" height="11" rx="2"/><path d="M6.5 15.5h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i="accountCopyAll">Скопировать всё</span>
+            </button>
+
+            <div class="account-timer-card">
+              <span class="account-timer-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.8v4.5l3 1.8"/></svg></span>
+              <div class="account-timer-copy"><b id="accountCountdown">10:00</b><span data-i="accountDownloadTime">Время на скачивание</span></div>
+            </div>
+
+            <button id="accountDoneBtn" class="account-done" data-i="done">Готово</button>
+          </div>
+          <div id="installSheetBody" class="video-sheet-body" hidden>
+            <button id="videoBanner" class="video-banner">
+              <span class="video-banner-play"><svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="video-banner-copy"><b data-i="videoBannerTitle">Смотреть видео-инструкцию</b><span data-i="videoBannerSub">Как выйти из Apple ID за 30 секунд</span></span>
+              <svg class="video-banner-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+
+            <div id="installMainView">
+              <h2 class="video-sheet-title" data-i="videoSheetTitle">Временный вход в Apple ID</h2>
+              <div class="apple-id-copy-card">
+                <p data-i="appleIdStep1">Для установки данного приложения на ваш iPhone необходимо выполнить временный вход в наш общий аккаунт iCloud (Apple ID).</p>
+                <p data-i="appleIdStep2">Следуйте простым шагам для выхода из текущего Apple ID и входа в новый аккаунт.</p>
+                <p data-i="appleIdStep3">После выхода нажмите кнопку «Получить общий Apple ID» ниже и введите данные нового аккаунта. У вас будет 10 минут для входа.</p>
+              </div>
+
+              <aside class="sign-in-notice" aria-labelledby="signInNoticeTitle">
+                <span class="sign-in-notice-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.3 4.5a2 2 0 0 1 3.4 0l7 12a2 2 0 0 1-1.7 3H5a2 2 0 0 1-1.7-3z"/><path d="M12 9v4M12 16h.01"/></svg></span>
+                <div class="sign-in-notice-copy">
+                  <b id="signInNoticeTitle" data-i="signInNoticeTitle">Важно при каждом входе</b>
+                  <p data-i="signInNoticeIntro">Чтобы избежать проблем после обновления, при входе в аккаунт выберите:</p>
+                  <p class="sign-in-notice-steps"><strong data-i="signInNoticeOptions">«Другие возможности»</strong><span data-i="signInNoticeNext">затем на следующем экране</span><strong data-i="signInNoticeSkip">«Не улучшать»</strong></p>
+                  <p data-i="signInNoticeEnd">После этого переходите к скачиванию приложения.</p>
+                </div>
+              </aside>
+
+              <div class="info-row">
+                <span class="info-icon info-icon-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.8v4.4l3 1.8"/></svg></span>
+                <div><b data-i="infoTimeTitle">10 минут на установку</b><span data-i="infoTimeSub">Этого достаточно, чтобы установить приложение</span></div>
+              </div>
+              <div class="info-row">
+                <span class="info-icon info-icon-safe"><svg viewBox="0 0 24 24"><rect x="6.5" y="10.5" width="11" height="9" rx="1.8"/><path d="M9 10.5V8a3 3 0 0 1 6 0v2.5"/></svg></span>
+                <div><b data-i="infoSafeTitle">Ваши данные в безопасности</b><span data-i="infoSafeSub">Аккаунт используется временно только для установки</span></div>
+              </div>
+              <button id="videoHelpRow" class="info-row info-row-stub">
+                <span class="info-icon info-icon-guide"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 10.5v5M12 7.6h.01"/></svg></span>
+                <div><b data-i="infoHowTitle">Инструкция как выйти</b></div>
+                <svg class="info-row-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+              </button>
+              <div class="install-main-actions">
+                <div id="installGateMessage" class="install-gate-message" role="status" aria-live="polite" hidden></div>
+                <button id="getSharedAppleIdBtn" class="install-main-primary" data-i="getSharedAppleId">Получить общий Apple ID</button>
+                <button id="closeSheetBottom" class="install-main-close" data-i="closeInstallMenu">Закрыть</button>
+              </div>
+            </div>
+
+            <div id="installGuideView" class="install-guide-view" hidden>
+              <h2 class="install-guide-title" data-i="guideTitle">Инструкция по установке</h2>
+              <p class="install-guide-subtitle" data-i="guideSubtitle">Следуйте простым шагам для выхода из текущего Apple ID и входа в новый аккаунт.</p>
+              <ol class="install-guide-steps">
+                <li><span data-i="guideStep1">Откройте приложение «Настройки» на вашем iPhone</span></li>
+                <li><span data-i="guideStep2">Нажмите на ваше имя в верхней части экрана</span></li>
+                <li><span data-i="guideStep3">Прокрутите вниз и выберите «Выйти»</span></li>
+                <li><span data-i="guideStep4">Введите пароль вашего текущего Apple ID</span></li>
+                <li><span data-i="guideStep5">Подтвердите выход, выбрав «Выйти» в правом верхнем углу</span></li>
+                <li><span data-i="guideStep6">После выхода нажмите кнопку «Получить общий Apple ID» ниже и введите данные нового аккаунта. У вас будет 10 минут для входа</span></li>
+                <li class="install-guide-warning"><span data-i="appleIdSignInNote">Чтобы избежать проблем после обновления, при каждом входе в аккаунт выбирайте «Другие возможности», а на следующем экране — «Не улучшать».</span></li>
+              </ol>
+              <button id="guideDoneBtn" class="install-guide-done" data-i="guideDone">Понятно</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="videoOverlay" class="overlay video-player-overlay" hidden>
+        <button id="videoOverlayClose" class="circle-chip video-overlay-close" aria-label="Close"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+        <video id="instructionVideo" playsinline controls preload="none" src="instruction.mp4"></video>
+      </div>
+
+      <div id="toast" class="toast" hidden></div>
+    </div>
+  </div>
+  <dialog id="catalogPreviewDialog" class="catalog-preview-dialog" aria-labelledby="catalogPreviewTitle" aria-describedby="catalogPreviewText">
+    <div class="catalog-preview-heading"><img id="catalogPreviewIcon" alt=""><div><small id="catalogPreviewKicker"></small><h2 id="catalogPreviewTitle"></h2></div></div>
+    <p id="catalogPreviewText"></p>
+    <button id="catalogPreviewClose" type="button">Закрыть</button>
+  </dialog>
+  <script data-cfasync="false" src="vendor/email-decode.min.js"></script><script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="catalog-content.js?v=appway-editorial-10"></script>
+  <script src="app.js?v=appway-editorial-17"></script>
+  <script src="preview.js?v=original-1"></script>
+</body>
+</html>

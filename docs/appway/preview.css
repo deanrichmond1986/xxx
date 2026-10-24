@@ -1,7 +1,5 @@
-/* Launcher-only adjustments; the archive stylesheet owns the design. */
-.preview-control{display:block;width:100%;padding:14px;margin-top:10px;border-radius:14px;background:var(--blue);color:white;cursor:pointer}
-.preview-mode .device-stage{padding:16px}
-.preview-mode .site-shell{min-height:0;height:min(900px,calc(100dvh - 32px));max-width:100%}
+/* Preview-only viewport compatibility; uploaded styles.css owns the UI. */
+.preview-mode .site-shell{max-width:100%}
 @media(max-width:500px){.preview-mode .device-stage{padding:0;display:block}.preview-mode .site-shell{--notch:0px;width:100%;height:100dvh;min-height:100dvh;border:0;border-radius:0}.preview-mode .site-shell::before{display:none}}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
