@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.getElementById('getSharedAppleIdBtn').onclick=message;
 });
 
-// Fit the entire device proportionally; keep its internal CSS-pixel viewport fixed.
-function fitIPhonePreview(){
- const deviceScale=Math.min(1,Math.max(0.1,(innerWidth-48)/409),Math.max(0.1,(innerHeight-48)/868));
- document.documentElement.style.setProperty('--iphone-preview-scale',String(deviceScale));
+// Fit the mobile app viewport proportionally without simulating a device.
+function fitMobilePreview(){
+ const viewportScale=Math.min(1,Math.max(0.1,(innerWidth-48)/393),Math.max(0.1,(innerHeight-48)/852));
+ document.documentElement.style.setProperty('--mobile-preview-scale',String(viewportScale));
 }
-window.addEventListener('resize',fitIPhonePreview,{passive:true});
-fitIPhonePreview();
+window.addEventListener('resize',fitMobilePreview,{passive:true});
+fitMobilePreview();
