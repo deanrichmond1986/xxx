@@ -4,6 +4,6 @@ The uploaded index.html now supplies the original screen structure. The archive'
 
 Public entry: `/xxx/appway/index.html?preview=1`. The prior `preview.html?preview=1` URL redirects here. The project already supports the preview=1 query for viewing on desktop and non-iPhone devices. The compatibility stylesheet removes the desktop phone frame on narrow screens and provides visible focus and reduced-motion support.
 
-The archive has no backend or instruction.mp4. The preview adapter gives explicit unavailable feedback for account issuance/video, rather than pretending to install apps or generating account credentials. Some screenshot references are absent from the archive; the adapter uses only supplied local screenshots and the original fallback renderer. Remote icons retain the application's own fallback.
+The uploaded instruction.mp4 is served by the original video player. The archive has no backend. The preview adapter gives explicit unavailable feedback for account issuance, rather than pretending to install apps or generating account credentials. Some screenshot references are absent from the archive; the adapter uses only supplied local screenshots and the original fallback renderer. Remote icons retain the application's own fallback.
 
 Serve this directory with a static server, for example `python3 -m http.server 8093 --bind 127.0.0.1 --directory /workspace/xxx/docs/appway`. No package installation or build is needed. Static GitHub Pages publication is independent of the Money Tap root frontend.

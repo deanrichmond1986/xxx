@@ -4,5 +4,4 @@ APPS.forEach(app=>{if(app.shots)app.shots=app.shots.filter(src=>!src.startsWith(
 document.addEventListener('DOMContentLoaded',()=>{
  const message=()=>showToast(state.lang==='ru'?'Для установки нужен сервер проекта. В этом просмотре доступен каталог.':'Installation needs the project server. This preview provides the catalog.',4500);
  document.getElementById('getSharedAppleIdBtn').onclick=message;
- document.getElementById('videoBanner').onclick=()=>showToast(state.lang==='ru'?'Видео не включено в архив.':'The archive does not include the video.',3500);
 });
