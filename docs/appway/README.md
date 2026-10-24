@@ -2,7 +2,7 @@
 
 The uploaded index.html now supplies the original screen structure. The archive's app.js, catalog-content.js and styles.css remain unchanged. Deployment adapts only missing home-icon paths to the supplied logo, makes Cloudflare email decoding local to this subdirectory, and adds the existing preview adapter and viewport stylesheet. No original screen markup, text, or navigation is reconstructed.
 
-Public entry: `/xxx/appway/index.html?preview=1`. The prior `preview.html?preview=1` URL redirects here. The project already supports the preview=1 query for viewing on desktop and non-iPhone devices. The compatibility stylesheet removes the desktop phone frame on narrow screens and provides visible focus and reduced-motion support.
+Public entry: `/xxx/appway/index.html?preview=1`. The prior `preview.html?preview=1` URL redirects here. The project already supports the preview=1 query for viewing on desktop and non-iPhone devices. The compatibility stylesheet removes the desktop phone frame at every viewport size, so browser viewing fills the viewport like the Telegram surface. It also provides visible focus and reduced-motion support. The preview query bypasses the original iPhone-only gate without introducing a phone border or notch.
 
 The uploaded instruction.mp4 is served by the original video player. The archive has no backend. The preview adapter gives explicit unavailable feedback for account issuance, rather than pretending to install apps or generating account credentials. Some screenshot references are absent from the archive; the adapter uses only supplied local screenshots and the original fallback renderer. Remote icons retain the application's own fallback.
 

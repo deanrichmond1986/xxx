@@ -1,5 +1,6 @@
-/* Preview-only viewport compatibility; uploaded styles.css owns the UI. */
-.preview-mode .site-shell{max-width:100%}
-@media(max-width:500px){.preview-mode .device-stage{padding:0;display:block}.preview-mode .site-shell{--notch:0px;width:100%;height:100dvh;min-height:100dvh;border:0;border-radius:0}.preview-mode .site-shell::before{display:none}}
+/* Browser viewing uses the full viewport, matching the Telegram surface. */
+.preview-mode .device-stage{padding:0;display:block;min-height:100dvh}
+.preview-mode .site-shell{--notch:0px;width:100%;max-width:none;height:100dvh;min-height:100dvh;border:0;border-radius:0;box-shadow:none}
+.preview-mode .site-shell::before{display:none}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
